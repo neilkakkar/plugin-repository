@@ -8,10 +8,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - run: 'echo "payload: ${{ toJson(github.event.client_payload) }}"'
       - run: |
           echo "${{ github.event.client_payload.message }}"
       - run: |
           head -n -2 repository.json > temp.json
           mv temp.json repository.json
-          echo "${{ github.event.client_payload.message }}" > repository.json
+          echo "${{ github.event.client_payload.message }}" >> repository.json
       - uses: peter-evans/create-pull-request@v3

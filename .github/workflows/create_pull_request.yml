@@ -8,11 +8,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - run: 'sudo apt-get install -y jq'
       - run: 'echo "payload: ${{ toJson(github.event.client_payload) }}"'
       - run: |
-          echo "${{ github.event.client_payload.message }}"
+          echo "${{ github.event.client_payload.user }}"
       - run: |
           head -n -2 repository.json > temp.json
           mv temp.json repository.json
-          echo "${{ github.event.client_payload.message }}" >> repository.json
+          echo '},' >> repository.json
+          echo '{"name": "Pagerduty (BETA)",
+          payload='{"name": "${{ github.event.client_payload.name }}", "url": "${{ github.event.client_payload.url }}", "description": "${{ github.event.client_payload.description }}", "verified": true, "maintainer": "official", "displayOnWebsiteLib": true, "type": "???"}'
+          echo $payload | jq >> repository.json
+      - run: echo "]" >> repository.json
       - uses: peter-evans/create-pull-request@v3

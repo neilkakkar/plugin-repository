@@ -20,3 +20,8 @@ jobs:
           echo $payload | jq >> repository.json
           echo "]" >> repository.json
       - uses: peter-evans/create-pull-request@v3
+      - with:
+          delete-branch: true
+          branch-suffix: random
+          title: 'Add New Plugin to Repository'
+          body: ''

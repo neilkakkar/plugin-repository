@@ -16,7 +16,6 @@ jobs:
           head -n -2 repository.json > temp.json
           mv temp.json repository.json
           echo '},' >> repository.json
-          echo '{"name": "Pagerduty (BETA)",
           payload='{"name": "${{ github.event.client_payload.name }}", "url": "${{ github.event.client_payload.url }}", "description": "${{ github.event.client_payload.description }}", "verified": true, "maintainer": "official", "displayOnWebsiteLib": true, "type": "???"}'
           echo $payload | jq >> repository.json
       - run: echo "]" >> repository.json

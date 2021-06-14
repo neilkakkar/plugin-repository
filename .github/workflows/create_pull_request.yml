@@ -18,5 +18,5 @@ jobs:
           echo '},' >> repository.json
           payload='{"name": "${{ github.event.client_payload.name }}", "url": "${{ github.event.client_payload.url }}", "description": "${{ github.event.client_payload.description }}", "verified": true, "maintainer": "official", "displayOnWebsiteLib": true, "type": "???"}'
           echo $payload | jq >> repository.json
-      - run: echo "]" >> repository.json
+          echo "]" >> repository.json
       - uses: peter-evans/create-pull-request@v3
